@@ -59,7 +59,7 @@ function draw() {
   }
 }
 
-function mousePressed() {
+function mouseIsPressed() {
   fill(255);
   textSize(24);
   textFont('Georgia');
