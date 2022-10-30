@@ -3,13 +3,15 @@
 //October 31
 
 let _minWidth;
-let t = 0.0;
 let lineArr = [];
+let ghosts = [];
 
 function setup() {
   createCanvas(600, 600);
   setSquiggly();
-  ghost = new GhostObject();
+  for (var i = 0; i < 10; i++) {
+    ghosts.push(new Ghost());
+  }
 }
 
 //set up stroke and ensure that it is responsive to canvas size
@@ -21,84 +23,68 @@ function setSquiggly() {
   }
 }
 
-class GhostObject {
+class Ghost {
   constructor() {
-    this.ran = random(2);
-    this.ghostSize = 5;
-	this.osci = 10 * sin(t);
-	this.oscic = 10 * cos(t);
-	this.hW = 200 / this.ghostSize;
-	this.hH = 200 / (this.ghostSize - 1) + (this.ran == 1 ? this.osci / 5 : this.oscic / 5);
+    this.tail = [];
+    this.tailLength = 30;
+
+    // Give ghost a random size and starting location
+    this.ghostSize = random(10, 100);
+    this.ghostX = random(width);
+    this.ghostY = random(height);
+
+    this.cosOffset = random(100);
+    this.wiggliness = random(2, 10);
+    this.floatiness = random(2, 10);
+
+
+    // Give ghost a random color
+    this.r = random(255);
+    this.g = random(255);
+    this.b = random(255);
   }
-  
-  display() {
-    noStroke();
-    translate(mouseX, mouseY);
-    push();
+
+  moveAndDraw() {
+
+    // Move ghost left and right in canvas
+    this.ghostX += cos((this.cosOffset + frameCount) / 10) * this.wiggliness;
     
-    //leg shadow
-    fill(200);
-    beginShape();
-    vertex(-this.hW, 0);
-    vertex(this.hW, 0);
-    for (let i = this.hW; this.i > -this.hW + 1; i -= 1) {
-      this.y = this.hH + (this.hH / 10) * cos(i / (this.hW / 500) + t);
-      vertex(i, this.y);
-      }
-    vertex(-this.hW, this.hH);
-    endShape();
-
-    //ghost body
-    this.bodycol = ["#ffffff", "#fbfefb"];
-    fill(this.bodycol[int(random(this.bodycol.length))]);
-
-    beginShape();
-    vertex(this.hW, 0);
-    bezierVertex(this.hW * 1.1, -this.hH * 1.35, -this.hW * 1.1, -this.hH * 1.35, -this.hW, 0);
-    vertex(-this.hW, this.hH);
-    for (let i = -this.hW; this.i < this.hW + 1; this.i += 1) {
-      this.y = this.hH + (this.hH / 10) * sin(i / (this.hW / 500) - t);
-      vertex(this.i, this.y);
+    // Move ghost up canvas
+    this.ghostY -= this.floatiness;
+    
+    // Start ghost at the bottom again once it reaches top of canvas
+    if (this.ghostY < -this.ghostSize) {
+      this.ghostY = height + this.ghostSize;
     }
-    vertex(this.hW, 0);
-    endShape();
-    pop();
 
-    //eye
-    this.mouthcol = color("#b38184");
-    this.eyecol = color("#574f7d");
-    if (this.ran == 1) {
-      fill(this.eyecol);
-      strokeCap(ROUND);
-      ellipse(-this.hW / 2, -hH / 2 + abs(this.osci / 5), this.hW / 5);
-      ellipse(this.hW / 5, -hH / 2 + abs(this.osci / 5), this.hW / 5);
-      push();
-      stroke(this.mouthcol);
-      fill(this.mouthcol);
-      strokeWeight(this.hW / 10);
-      ellipse(
-        -this.hW / 6.5,
-        -this.hH / 4 + abs(this.osci / 5),
-        this.hW / 6 + 2 * sin(this.t / 2),
-        (this.hW / 6) * sin(this.t / 2)
-      );
-      pop();
-      } else {
-        stroke(this.eyecol);
-        strokeWeight(this.hW / 10);
-        noFill();
-        arc(this.hW / 2, -this.hH / 2 + abs(this.oscic / 5), this.hW / 5, this.hW / 5, 360, 180);
-        arc(-this.hW / 5, -this.hH / 2 + abs(this.oscic / 5), this.hW / 5, this.hW / 5, 360, 180);
-        push();
-        fill(this.mouthcol);
-        stroke(this.mouthcol);
-        ellipse(
-          this.hW / 5.5,
-          -this.hH / 4 + abs(this.oscic / 5),
-          this.hW / 6 + 2 * abs(this.oscic / 5) * 0.3,
-          (this.hW / 6) * abs(this.oscic / 5) * 0.3
-        );
+    this.tail.unshift({x: this.ghostX, y: this.ghostY});
+    
+    // Remove last point if array is too large
+    if (this.tail.length > this.tailLength) {
+      this.tail.pop();
     }
+
+    // loop over tail and draw points
+    for (let index = 0; index < this.tail.length; index++) {
+      const tailPoint = this.tail[index];
+      // make tail smaller and more transparent
+      const pointSize = this.ghostSize * (this.tail.length - index) / this.tail.length;
+      const pointAlpha = 255 * (this.tail.length - index) / this.tail.length;
+      fill(this.r, this.g, this.b, pointAlpha);
+      ellipse(tailPoint.x, tailPoint.y, pointSize);
+    }
+
+    // draw ghost's face
+    fill(32);
+    ellipse(this.ghostX - this.ghostSize * .2,
+            this.ghostY - this.ghostSize * .1,
+            this.ghostSize * .2);
+    ellipse(this.ghostX + this.ghostSize * .2,
+            this.ghostY - this.ghostSize * .1,
+            this.ghostSize * .2);
+    ellipse(this.ghostX,
+            this.ghostY + this.ghostSize * .2,
+            this.ghostSize * .2);
   }
 }
 
@@ -197,9 +183,12 @@ function draw() {
     lineArr[i].update();
     lineArr[i].draw();
   }
-  //ghost.display();
+  
+  for (const ghost of ghosts) {
+    ghost.moveAndDraw();
+  }
 }
 
 function mousePressed() {
-  ghost.display();
+  //ghost.display();
 }
