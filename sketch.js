@@ -42,11 +42,9 @@ function bend(aryXy, rad, initAng, angStep, numberCycle) {
   return aryXy2;
 }
 
-//call update and draw methods
+//call update and draw methods of squiggly line object and call moveAndDraw method of ghost object
 function draw() {
   background(0);
-  //stroke(0, 255, 0);
-  //strokeWeight(_minWidth/40);
   fill(255,165,0);
   strokeJoin(ROUND);
   translate(300, 300); //keep in center of canvas

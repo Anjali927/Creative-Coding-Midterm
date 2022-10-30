@@ -5,7 +5,7 @@ class Ghost {
       this.tail = [];
       this.tailLength = 30;
   
-      // Give ghost a random size and starting location
+      //give ghost a random size and starting location
       this.ghostSize = random(10, 100);
       this.ghostX = random(0);
       this.ghostY = random(height);
@@ -15,7 +15,7 @@ class Ghost {
       this.float = random(2, 10);
   
   
-      // Give ghost a random color
+      //give ghost a random color
       this.r = random(255);
       this.g = random(255);
       this.b = random(255);
@@ -23,35 +23,34 @@ class Ghost {
   
     moveAndDraw() {
   
-      // Move ghost left and right in canvas
+      //move ghost left and right in canvas
       this.ghostX += cos((this.cosOffset + frameCount) / 10) * this.wiggle;
       
-      // Move ghost up canvas
+      //move ghost up canvas
       this.ghostY -= this.float;
       
-      // Start ghost at the bottom again once it reaches top of canvas
+      //start ghost at the bottom again once it reaches top of canvas
       if (this.ghostY < -this.ghostSize) {
         this.ghostY = height + this.ghostSize;
       }
   
       this.tail.unshift({x: this.ghostX, y: this.ghostY});
       
-      // Remove last point if array is too large
       if (this.tail.length > this.tailLength) {
         this.tail.pop();
       }
   
-      // loop over tail and draw points
+      //loop over tail and draw points
       for (let index = 0; index < this.tail.length; index++) {
         const tailPoint = this.tail[index];
-        // make tail smaller and more transparent
+        //make ghost tail smaller and more transparent
         const pointSize = this.ghostSize * (this.tail.length - index) / this.tail.length;
         const pointAlpha = 255 * (this.tail.length - index) / this.tail.length;
         fill(this.r, this.g, this.b, pointAlpha);
         ellipse(tailPoint.x, tailPoint.y, pointSize);
       }
   
-      // draw ghost's face
+      //draw ghost's face
       fill(32);
       ellipse(this.ghostX - this.ghostSize * .2,
               this.ghostY - this.ghostSize * .1,

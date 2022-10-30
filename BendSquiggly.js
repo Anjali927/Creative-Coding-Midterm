@@ -1,4 +1,5 @@
 //BendSquiggly class to create squiggly line object
+
 class BendSquiggly {
     constructor() {
       this.rad = _minWidth / 3;
@@ -30,6 +31,7 @@ class BendSquiggly {
       this.numberCycle = 7;
     }
     
+    //update points in line array
     update() {
       this.updateRad();
       this.updateInitAng();
@@ -53,6 +55,7 @@ class BendSquiggly {
       }
     }
     
+    //draw squiggly line
     draw() {
       beginShape();
       for (let i = 0; i < this.newAryXy.length; i++) {
