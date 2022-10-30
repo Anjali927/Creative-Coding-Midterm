@@ -7,12 +7,12 @@ class Ghost {
   
       // Give ghost a random size and starting location
       this.ghostSize = random(10, 100);
-      this.ghostX = random(width);
+      this.ghostX = random(-20, width);
       this.ghostY = random(height);
   
       this.cosOffset = random(100);
-      this.wiggliness = random(2, 10);
-      this.floatiness = random(2, 10);
+      this.wiggle = random(2, 10);
+      this.float = random(2, 10);
   
   
       // Give ghost a random color
@@ -24,10 +24,10 @@ class Ghost {
     moveAndDraw() {
   
       // Move ghost left and right in canvas
-      this.ghostX += cos((this.cosOffset + frameCount) / 10) * this.wiggliness;
+      this.ghostX += cos((this.cosOffset + frameCount) / 10) * this.wiggle;
       
       // Move ghost up canvas
-      this.ghostY -= this.floatiness;
+      this.ghostY -= this.float;
       
       // Start ghost at the bottom again once it reaches top of canvas
       if (this.ghostY < -this.ghostSize) {
