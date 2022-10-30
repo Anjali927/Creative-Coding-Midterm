@@ -1,3 +1,5 @@
+//Ghost class to create ghost object
+
 class Ghost {
     constructor() {
       this.tail = [];

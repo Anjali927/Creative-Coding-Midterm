@@ -1,4 +1,4 @@
-//create squiggly line object
+//BendSquiggly class to create squiggly line object
 class BendSquiggly {
     constructor() {
       this.rad = _minWidth / 3;
