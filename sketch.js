@@ -197,9 +197,9 @@ function draw() {
     lineArr[i].update();
     lineArr[i].draw();
   }
-  ghost.display();
+  //ghost.display();
 }
 
 function mousePressed() {
-  //ghost.display();
+  ghost.display();
 }
