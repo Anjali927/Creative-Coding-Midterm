@@ -20,6 +20,81 @@ function setSquiggly() {
   for (let i = 0; i < numLine; i++) {
     lineArr[i] = new BendSquiggly();
   }
+  let size = 5;
+	let osci = 10 * sin(t);
+	let oscic = 10 * cos(t);
+	let hW = w / size;
+	let hH = w / (size - 1) + (ran == 1 ? osci / 5 : oscic / 5);
+	noStroke();
+	push();
+	translate(x, y);
+	push();
+	//leg_shadow-----
+	fill(200);
+	beginShape();
+	vertex(-hW, 0);
+	vertex(hW, 0);
+	for (let i = hW; i > -hW + 1; i -= 1) {
+		let y = hH + (hH / 10) * cos(i / (hW / 500) + t);
+		vertex(i, y);
+	}
+	vertex(-hW, hH);
+	endShape();
+
+	//ghost_body-----
+	let bodycol = ["#ffffff", "#fbfefb"];
+	fill(bodycol[int(random(bodycol.length))]);
+
+	beginShape();
+	vertex(hW, 0);
+	bezierVertex(hW * 1.1, -hH * 1.35, -hW * 1.1, -hH * 1.35, -hW, 0);
+	vertex(-hW, hH);
+	for (let i = -hW; i < hW + 1; i += 1) {
+		let y = hH + (hH / 10) * sin(i / (hW / 500) - t);
+		vertex(i, y);
+	}
+	vertex(hW, 0);
+	endShape();
+	pop();
+
+	//eye-------
+
+	let mouthcol = color("#b38184");
+	let eyecol = color("#574f7d");
+	if (ran == 1) {
+		fill(eyecol);
+		// strokeCap(ROUND);
+		ellipse(-hW / 2, -hH / 2 + abs(osci / 5), hW / 5);
+		ellipse(hW / 5, -hH / 2 + abs(osci / 5), hW / 5);
+		push();
+		stroke(mouthcol);
+		fill(mouthcol);
+		strokeWeight(hW / 10);
+		ellipse(
+			-hW / 6.5,
+			-hH / 4 + abs(osci / 5),
+			hW / 6 + 2 * sin(t / 2),
+			(hW / 6) * sin(t / 2)
+		);
+		pop();
+	} else {
+		stroke(eyecol);
+		strokeWeight(hW / 10);
+		noFill();
+		arc(hW / 2, -hH / 2 + abs(oscic / 5), hW / 5, hW / 5, 360, 180);
+		arc(-hW / 5, -hH / 2 + abs(oscic / 5), hW / 5, hW / 5, 360, 180);
+		push();
+		fill(mouthcol);
+		stroke(mouthcol);
+		ellipse(
+			hW / 5.5,
+			-hH / 4 + abs(oscic / 5),
+			hW / 6 + 2 * abs(oscic / 5) * 0.3,
+			(hW / 6) * abs(oscic / 5) * 0.3
+		);
+		pop();
+	}
+	pop();
 }
 
 //create squiggly line object
