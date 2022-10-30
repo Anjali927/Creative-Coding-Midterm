@@ -1,4 +1,4 @@
-//Midterm Progress - bendy line object and ghost object
+//Midterm Progress - squiggly line object and ghost object
 //Anjali Shiyamsaran
 //October 31
 
@@ -42,7 +42,8 @@ function bend(aryXy, rad, initAng, angStep, numberCycle) {
   return aryXy2;
 }
 
-//call update and draw methods of squiggly line object and call moveAndDraw method of ghost object
+//call update and draw methods of squiggly line object
+//call moveAndDraw method of ghost object
 function draw() {
   background(0);
   fill(255,165,0);
@@ -59,5 +60,8 @@ function draw() {
 }
 
 function mousePressed() {
-  //ghost.display();
+  fill(255);
+  textSize(24);
+  textFont('Georgia');
+  text('Georgia', 300, 20);
 }
