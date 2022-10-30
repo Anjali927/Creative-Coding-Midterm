@@ -1,6 +1,7 @@
 //Midterm Progress - bendy line object
 //Anjali Shiyamsaran
 let _minWidth;
+let t = 0.0;
 
 function setup() {
   createCanvas(600, 600);
