@@ -45,9 +45,9 @@ function bend(aryXy, rad, initAng, angStep, numberCycle) {
 //call update and draw methods
 function draw() {
   background(0);
-  stroke(0, 255, 0);
-  strokeWeight(_minWidth/40);
-  noFill();
+  //stroke(0, 255, 0);
+  //strokeWeight(_minWidth/40);
+  fill(255,165,0);
   strokeJoin(ROUND);
   translate(300, 300); //keep in center of canvas
   for (let i = 0; i < lineArr.length; i++) {
