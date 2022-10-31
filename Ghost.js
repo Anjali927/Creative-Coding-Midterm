@@ -7,7 +7,7 @@ class Ghost {
   
       //give ghost a random size and starting location
       this.ghostSize = random(10, 100);
-      this.ghostX = random(mouseX);
+      this.ghostX = random(0);
       this.ghostY = random(height);
   
       this.cosOffset = random(100);
