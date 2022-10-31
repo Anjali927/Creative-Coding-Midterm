@@ -1,7 +1,8 @@
 //Midterm Progress - squiggly line object and ghost object
 //Anjali Shiyamsaran
 //October 31
-//press down mouse to wake up the ghosts
+//Press down mouse to wake up the ghosts
+//Watched Angles and Vectors tutorial for tips on how to use p5.Vector to create a squiggly line: https://www.youtube.com/watch?v=oXwCVDXS2Lg
 
 let _minWidth;
 let lineArr = [];
