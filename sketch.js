@@ -58,3 +58,7 @@ function draw() {
     ghost.moveAndDraw();
   }
 }
+
+function mousePressed() {
+  background(255);
+}
