@@ -2,8 +2,8 @@
 
 class Ghost {
   constructor() {
-    this.tail = [];
-    this.tailLength = 30;
+    this.ghostTail = [];
+    this.ghostTailLength = 30;
 
     //give ghost a random size and starting location
     this.ghostSize = random(10, 100);
@@ -32,21 +32,21 @@ class Ghost {
       this.ghostY = height + this.ghostSize;
     }
 
-    this.tail.unshift({
+    this.ghostTail.unshift({
       x: this.ghostX, 
       y: this.ghostY
     });
     
-    if (this.tail.length > this.tailLength) {
-      this.tail.pop();
+    if (this.ghostTail.length > this.ghostTailLength) {
+      this.ghostTail.pop();
     }
 
     //loop over tail and draw points
-    for (let index = 0; index < this.tail.length; index++) {
-      const tailPoint = this.tail[index];
+    for (let index = 0; index < this.ghostTail.length; index++) {
+      const tailPoint = this.ghostTail[index];
       //make ghost tail smaller and more transparent
-      const ptSize = this.ghostSize * (this.tail.length - index) / this.tail.length;
-      const ptAlpha = 255 * (this.tail.length - index) / this.tail.length;
+      const ptSize = this.ghostSize * (this.ghostTail.length - index) / this.ghostTail.length;
+      const ptAlpha = 255 * (this.ghostTail.length - index) / this.ghostTail.length;
       fill(this.red, this.green, this.blue, ptAlpha);
       ellipse(tailPoint.x, tailPoint.y, ptSize);
     }
