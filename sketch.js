@@ -8,6 +8,7 @@ let ghosts = [];
 
 function setup() {
   createCanvas(600, 600);
+  background(0);
   setSquiggly();
   for (var i = 0; i < 10; i++) {
     ghosts.push(new Ghost());
@@ -45,7 +46,6 @@ function bend(aryXy, rad, initAng, angStep, numberCycle) {
 //call update and draw methods of squiggly line object
 //call moveAndDraw method of ghost object
 function draw() {
-  background(0);
   fill(255,165,0);
   strokeJoin(ROUND);
   translate(300, 300); //keep in center of canvas
