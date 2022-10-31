@@ -37,7 +37,7 @@ class BendSquiggly {
       this.updateInitAng();
       this.newAryXy = this.aryXy;
       for (let i = 0; i < this.numberBend; i++) {
-        this.newAryXy = bend(mouseX, this.aryRad[i], this.aryinitAng[i], this.aryAngStep[i], this.numberCycle);
+        this.newAryXy = bend(this.newAryXy, this.aryRad[i], this.aryinitAng[i], this.aryAngStep[i], this.numberCycle);
       }
     }
     
