@@ -58,10 +58,3 @@ function draw() {
     ghost.moveAndDraw();
   }
 }
-
-function mouseIsPressed() {
-  fill(255);
-  textSize(24);
-  textFont('Georgia');
-  text('Georgia', 300, 20);
-}
