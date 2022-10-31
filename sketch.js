@@ -54,11 +54,9 @@ function draw() {
     lineArr[i].draw();
   }
   
-  for (const ghost of ghosts) {
-    ghost.moveAndDraw();
+  if (mouseIsPressed) {
+    for (const ghost of ghosts) {
+      ghost.moveAndDraw();
+    }
   }
-}
-
-function mousePressed() {
-  background(255);
 }
