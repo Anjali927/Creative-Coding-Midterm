@@ -1,6 +1,7 @@
 //Midterm Progress - squiggly line object and ghost object
 //Anjali Shiyamsaran
 //October 31
+//press down mouse to wake up the ghosts
 
 let _minWidth;
 let lineArr = [];
