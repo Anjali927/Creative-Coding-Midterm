@@ -2,9 +2,8 @@
 
 class BendSquiggly {
     constructor() {
-      stroke(255);
-      noFill();
-        this.rad = _minWidth / 3;
+      noStroke();
+      this.rad = _minWidth / 3;
       this.numberPoints = 600;
       this.aryXy = [];
       
